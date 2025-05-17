@@ -1,0 +1,89 @@
+#include <stdio.h>
+
+#define MOVIMENTOS_TORRE 5        // Número de casas que a torre se move para a direita
+#define MOVIMENTOS_BISPO 5        // Número de casas que o bispo se move na diagonal
+#define MOVIMENTOS_RAINHA 8       // Número de casas que a rainha se move para a esquerda
+#define MOVIMENTOS_CAVALO_CIMA 2  // Número de casas para o movimento do cavalo para cima
+#define MOVIMENTOS_CAVALO_DIREITA 1 // Número de casas para o movimento do cavalo para a direita
+
+// Função recursiva para mover a Torre (direção para a direita)
+void mover_torre(int casa) {
+    if (casa > MOVIMENTOS_TORRE) return;
+    printf("Torre se move para a Direita: Casa %d\n", casa);
+    mover_torre(casa + 1);  // Chamada recursiva para a próxima casa
+}
+
+// Função recursiva para mover o Bispo (diagonal superior direita)
+void mover_bispo(int casa) {
+    if (casa > MOVIMENTOS_BISPO) return;
+    printf("Bispo se move para: Cima, Direita (Casa %d)\n", casa);
+    mover_bispo(casa + 1);  // Chamada recursiva para a próxima casa
+}
+
+// Função recursiva para mover a Rainha (direção para a esquerda)
+void mover_rainha(int casa) {
+    if (casa <= 0) return;
+    printf("Rainha se move para a Esquerda: Casa %d\n", casa);
+    mover_rainha(casa - 1);  // Chamada recursiva para a próxima casa
+}
+
+// Função para mover o Cavalo (2 para cima e 1 para a direita)
+void mover_cavalo() {
+    int i, j;
+
+    // Primeira parte do movimento: Move duas casas para cima
+    for (i = 1; i <= MOVIMENTOS_CAVALO_CIMA; i++) {
+        printf("Cavalo se move para Cima: Casa %d\n", i);
+    }
+
+    // Segunda parte do movimento: Move uma casa para a direita com loops aninhados
+    for (i = 1; i <= MOVIMENTOS_CAVALO_CIMA; i++) {
+        for (j = 1; j <= MOVIMENTOS_CAVALO_DIREITA; j++) {
+            if (i == 1 && j == 1) {
+                printf("Cavalo se move para Direita: Casa %d\n", j);
+            }
+            if (j > 1) {
+                break; // Usa break para sair do loop interno após o primeiro movimento
+            }
+        }
+    }
+}
+
+// Função principal que orquestra o movimento das peças
+int main() {
+    int opcao;
+
+    // Menu de escolha da peça
+    printf("Escolha a peça para movimentação:\n");
+    printf("1. Torre\n");
+    printf("2. Bispo\n");
+    printf("3. Rainha\n");
+    printf("4. Cavalo\n");
+    printf("Digite o número da peça: ");
+    scanf("%d", &opcao);
+
+    // Estrutura condicional para verificar a escolha e chamar a função de movimentação
+    switch (opcao) {
+        case 1:
+            printf("\nMovendo a Torre:\n");
+            mover_torre(1);  // Inicia o movimento da Torre com a casa 1
+            break;
+        case 2:
+            printf("\nMovendo o Bispo:\n");
+            mover_bispo(1);  // Inicia o movimento do Bispo com a casa 1
+            break;
+        case 3:
+            printf("\nMovendo a Rainha:\n");
+            mover_rainha(MOVIMENTOS_RAINHA);  // Inicia o movimento da Rainha
+            break;
+        case 4:
+            printf("\nMovendo o Cavalo:\n");
+            mover_cavalo();  // Inicia o movimento do Cavalo
+            break;
+        default:
+            printf("Opção inválida! Escolha uma opção entre 1 e 4.\n");
+            break;
+    }
+
+    return 0;
+}
