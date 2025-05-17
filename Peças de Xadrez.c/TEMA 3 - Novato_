@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+#define MOVIMENTOS_TORRE 5     // Número de casas que a torre se move para a direita
+#define MOVIMENTOS_BISPO 5     // Número de casas que o bispo se move na diagonal
+#define MOVIMENTOS_RAINHA 8    // Número de casas que a rainha se move para a esquerda
+
+// Função para mover a Torre (direção para a direita)
+void mover_torre() {
+    for (int i = 1; i <= MOVIMENTOS_TORRE; i++) {
+        printf("Torre se move para a Direita: Casa %d\n", i);
+    }
+}
+
+// Função para mover o Bispo (diagonal superior direita)
+void mover_bispo() {
+    int i = 1;
+    while (i <= MOVIMENTOS_BISPO) {
+        printf("Bispo se move para: Cima, Direita (Casa %d)\n", i);
+        i++;
+    }
+}
+
+// Função para mover a Rainha (direção para a esquerda)
+void mover_rainha() {
+    int i = MOVIMENTOS_RAINHA;
+    do {
+        printf("Rainha se move para a Esquerda: Casa %d\n", i);
+        i--;
+    } while (i > 0);
+}
+
+// Função principal que orquestra o movimento das peças
+int main() {
+    int opcao;
+
+    // Menu de escolha da peça
+    printf("Escolha a peça para movimentação:\n");
+    printf("1. Torre\n");
+    printf("2. Bispo\n");
+    printf("3. Rainha\n");
+    printf("Digite o número da peça: ");
+    scanf("%d", &opcao);
+
+    // Estrutura condicional para verificar a escolha e chamar a função de movimentação
+    switch (opcao) {
+        case 1:
+            printf("\nMovendo a Torre:\n");
+            mover_torre();
+            break;
+        case 2:
+            printf("\nMovendo o Bispo:\n");
+            mover_bispo();
+            break;
+        case 3:
+            printf("\nMovendo a Rainha:\n");
+            mover_rainha();
+            break;
+        default:
+            printf("Opção inválida! Escolha uma opção entre 1 e 3.\n");
+            break;
+    }
+
+    return 0;
+}
